@@ -41,13 +41,8 @@ import adminRoutes from "./routes/adminRoutes.js";
 // Services
 // -----------------------------------------------------------------------------
 
-import {
-  verifyEmailConnection,
-} from "./services/emailService.js";
-
-import {
-  startBookingExpirationJob,
-} from "./services/bookingExpirationService.js";
+import { verifyEmailConnection } from "./services/emailService.js";
+import { startBookingExpirationJob } from "./services/bookingExpirationService.js";
 
 // -----------------------------------------------------------------------------
 // Express App
@@ -137,73 +132,49 @@ app.get("/", (req, res) => {
 // Authentication Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/auth",
-  authRoutes
-);
+app.use("/api/auth", authRoutes);
 
 // -----------------------------------------------------------------------------
 // Airline Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/airlines",
-  airlineRoutes
-);
+app.use("/api/airlines", airlineRoutes);
 
 // -----------------------------------------------------------------------------
 // Airport Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/airports",
-  airportRoutes
-);
+app.use("/api/airports", airportRoutes);
 
 // -----------------------------------------------------------------------------
 // Aircraft Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/aircraft",
-  aircraftRoutes
-);
+app.use("/api/aircraft", aircraftRoutes);
 
 // -----------------------------------------------------------------------------
 // Flight Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/flights",
-  flightRoutes
-);
+app.use("/api/flights", flightRoutes);
 
 // -----------------------------------------------------------------------------
 // Booking Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/bookings",
-  bookingRoutes
-);
+app.use("/api/bookings", bookingRoutes);
 
 // -----------------------------------------------------------------------------
 // Payment Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/payments",
-  paymentRoutes
-);
+app.use("/api/payments", paymentRoutes);
 
 // -----------------------------------------------------------------------------
 // Admin Routes
 // -----------------------------------------------------------------------------
 
-app.use(
-  "/api/admin",
-  adminRoutes
-);
+app.use("/api/admin", adminRoutes);
 
 // -----------------------------------------------------------------------------
 // 404 Handler
@@ -221,18 +192,11 @@ app.use((req, res) => {
 // -----------------------------------------------------------------------------
 
 app.use((err, req, res, next) => {
-  console.error(
-    "GLOBAL ERROR:",
-    err
-  );
+  console.error("GLOBAL ERROR:", err);
 
-  res.status(
-    err.status || 500
-  ).json({
+  res.status(err.status || 500).json({
     success: false,
-    message:
-      err.message ||
-      "Internal server error",
+    message: err.message || "Internal server error",
   });
 });
 
@@ -252,14 +216,9 @@ const startServer = async () => {
     // Start Express Server
     // -------------------------------------------------------------------------
 
-    app.listen(PORT, () => {
-      console.log(
-        `Server running on http://localhost:${PORT}`
-      );
-
-      console.log(
-        `Client URL: ${CLIENT_URL}`
-      );
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Client URL: ${CLIENT_URL}`);
     });
 
     // -------------------------------------------------------------------------
